@@ -50,6 +50,9 @@ function getMessages() {
 function move(id){
     location.href= `/detail/${id}`
 }
+function loginPage(){
+    location.href='/login'
+}
 function addHTML(id, username, title, contents, modifiedAt) {
     let tempHtml = `<a onclick="move(${id})">
                     <div class="card">

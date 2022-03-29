@@ -32,9 +32,13 @@
         <div id="header-title-select-shop">
             <h2><span th:text="${username}"></span>님의 게시판</h2>
         </div>
+        <form>
+            <a id="logout-text1" onclick="loginPage()">로그인</a>
+        </form>
         <form id="my_form" method="post" action="/user/logout">
             <a id="logout-text" href="javascript:{}" onclick="document.getElementById('my_form').submit();">로그아웃</a>
         </form>
+
         <p>게시판에 내용을 입력해주세요.</p>
     </div>
     <button type="button" id="content-button" class="btn btn-dark" onclick="moveWrite()">게시물 작성</button>

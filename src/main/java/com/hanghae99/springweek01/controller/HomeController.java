@@ -11,14 +11,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class HomeController {
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        model.addAttribute("username", userDetails.getUsername());
+        if (userDetails != null) {
+            model.addAttribute("username", userDetails.getUsername());
+        } else {
+            model.addAttribute("username", "");
+        }
         return "index";
     }
-
     @GetMapping("/write")
     public String writePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
         model.addAttribute("username", userDetails.getUsername());
         return "write";
+    }
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
     }
 
     @GetMapping("/detail/{id}")
