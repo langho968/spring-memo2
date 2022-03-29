@@ -24,18 +24,30 @@
                 box.style.display = "none";
             }
         }
+        function check(){
+
+            if($("#repassword").val() !== $("#password").val()){
+            alert("비밀번호가 일치 하지 않습니다.")
+                return false;
+        }
+        }
     </script>
 </head>
 <body>
 <div id="login-form">
-    <div id="login-title">Sign up Select Shop</div>
+    <div id="login-title">Sign up to 게시판</div>
 
     <form action="/user/signup" method="post">
         <div class="login-id-label">Username</div>
         <input type="text" name="username" placeholder="Username" class="login-input-box">
+        <div class="login-id-label" th:text="${msg}"></div>
 
         <div class="login-id-label">Password</div>
-        <input type="password" name="password" class="login-input-box">
+        <input type="password" name="password" class="login-input-box" id="password">
+        <div class="login-id-label" th:text="${msg}"></div>
+
+        <div class="login-id-label">RePassword</div>
+        <input type="password" name="repassword" class="login-input-box" id="repassword">
 
         <div class="login-id-label">E-mail</div>
         <input type="text" name="email" placeholder="E-mail" class="login-input-box">
@@ -44,7 +56,7 @@
             <input id="admin-check" type="checkbox" name="admin" onclick="onclickAdmin()" style="margin-top: 40px;">관리자
             <input id="admin-token" type="password" name="adminToken" placeholder="관리자 암호" class="login-input-box" style="display:none">
         </div>
-        <button id="login-id-submit">회원 가입</button>
+        <button id="login-id-submit" onclick="check(); return false">회원 가입</button>
     </form>
 </div>
 </body>

@@ -16,9 +16,11 @@ public class HomeController {
     }
 
     @GetMapping("/write")
-    public String writePage(){
+    public String writePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        model.addAttribute("username", userDetails.getUsername());
         return "write";
     }
+
     @GetMapping("/detail/{id}")
     public String detailPage(Model model, @PathVariable Long id){
         model.addAttribute("id", id);

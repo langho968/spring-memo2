@@ -12,17 +12,13 @@ function isValidContents(contents) {
 function writePost() {
     let contents = $('#contents').val();
     let title = $('#title').val();
-    let username = $('#username').val();
     if(isValidContents(contents)==false){
         return;
     }
     if(isValidContents(title)==false) {
         return;
     }
-    if(isValidContents(username)==false) {
-        return;
-    }
-    let data = {'username':username, 'title':title, 'contents': contents};
+    let data = {'username':username,'title':title, 'contents': contents};
     $.ajax({
         type: "POST",
         url: "/api/memos",

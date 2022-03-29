@@ -4,6 +4,7 @@ import com.hanghae99.springweek01.dto.SignupRequestDto;
 import com.hanghae99.springweek01.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -31,8 +32,13 @@ public class UserController {
 
     // 회원 가입 요청 처리
     @PostMapping("/user/signup")
-    public String registerUser(SignupRequestDto requestDto) {
-        userService.registerUser(requestDto);
+    public String registerUser(SignupRequestDto requestDto, Model model) {
+        try {
+            userService.registerUser(requestDto);
+        }catch (IllegalArgumentException e){
+            model.addAttribute("msg", e.getMessage());
+            return "signup";
+        }
         return "redirect:/user/login";
     }
 }
