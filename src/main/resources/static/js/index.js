@@ -25,6 +25,9 @@ $(document).ready(function () {
 
 
 // 메모를 불러와서 보여줍니다.
+function moveWrite(){
+    location.href= "/write"
+}
 function getMessages() {
     $('#cards-box').empty();
     $.ajax({
@@ -44,9 +47,11 @@ function getMessages() {
     })
 }
 
-
+function move(id){
+    location.href= `/detail/${id}`
+}
 function addHTML(id, username, title, contents, modifiedAt) {
-    let tempHtml = `<a href ="detail.html?id=${id}">
+    let tempHtml = `<a onclick="move(${id})">
                     <div class="card">
                         <div class="metadata">
                             <div class="date">

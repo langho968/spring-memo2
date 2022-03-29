@@ -1,10 +1,12 @@
 package com.hanghae99.springweek01.controller;
 
 import com.hanghae99.springweek01.domain.Memo;
-import com.hanghae99.springweek01.domain.MemoRepository;
-import com.hanghae99.springweek01.domain.MemoRequestDto;
+import com.hanghae99.springweek01.repository.MemoRepository;
+import com.hanghae99.springweek01.dto.MemoRequestDto;
+import com.hanghae99.springweek01.security.UserDetailsImpl;
 import com.hanghae99.springweek01.service.MemoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,10 @@ public class MemoController {
     private final MemoService memoService;
 
     @PostMapping("/api/memos")
-    public Memo createMemo(@RequestBody MemoRequestDto requestDto) {
-        Memo memo = new Memo(requestDto);
+    public Memo createMemo(@RequestBody MemoRequestDto requestDto,
+                           @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Long userId = userDetails.getUser().getId();
+        Memo memo = new Memo(requestDto, userId);
         return memoRepository.save(memo);
     }
     @GetMapping("/api/memos")

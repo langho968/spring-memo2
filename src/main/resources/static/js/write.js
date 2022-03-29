@@ -30,7 +30,10 @@ function writePost() {
         data: JSON.stringify(data),
         success: function (response) {
             alert('게시물이 성공적으로 작성되었습니다.');
-            window.location.href = "index.html";
+            move();
         }
     });
+}
+function move(){
+    location.href= "/"
 }

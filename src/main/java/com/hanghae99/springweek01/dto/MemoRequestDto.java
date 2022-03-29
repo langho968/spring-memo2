@@ -1,4 +1,4 @@
-package com.hanghae99.springweek01.domain;
+package com.hanghae99.springweek01.dto;
 
 
 import lombok.Getter;

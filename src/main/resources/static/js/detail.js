@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 function getMessages() {
     $('#cards-box2').empty();
-    let idVal = location.href.split("id=")[1];
+    let idVal = location.href.split("/")[4];
     console.log(idVal);
     $.ajax({
         type: "GET",
@@ -115,4 +115,7 @@ function isValidContents(contents) {
         return false;
     }
     return true;
+}
+function moveIndex(){
+    location.href= "/"
 }

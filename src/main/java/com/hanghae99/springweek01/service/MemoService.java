@@ -1,8 +1,8 @@
 package com.hanghae99.springweek01.service;
 
 import com.hanghae99.springweek01.domain.Memo;
-import com.hanghae99.springweek01.domain.MemoRepository;
-import com.hanghae99.springweek01.domain.MemoRequestDto;
+import com.hanghae99.springweek01.repository.MemoRepository;
+import com.hanghae99.springweek01.dto.MemoRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

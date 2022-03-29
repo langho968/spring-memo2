@@ -34,7 +34,30 @@ body {
     bottom: 15px;
     right: 17px;
 }
-
+#header-title-login-user {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+}
+#header-title-select-shop {
+    margin-top: 20px;
+    font-size: 45px;
+    letter-spacing: 1.1px;
+}
+#logout-text {
+    position:absolute;
+    top:48px;
+    right:48px;
+    font-size: 18px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #ffffff;
+}
 .background-header {
     position: fixed;
     z-index: -1;
