@@ -119,3 +119,21 @@ function isValidContents(contents) {
 function moveIndex(){
     location.href= "/"
 }
+function writeComment(){
+    let contents = $('#contents').val();
+     let username2 =[[${username}]];
+    let detailNum = location.href.split("/")[4];
+    let data = {'username':username2, 'contents':contents, 'detailNum': detailNum};
+    console.log(data);
+    $.ajax({
+        type:"POST",
+        url:"/api/comments",
+        contentType: "application/json",
+        data : JSON.stringify(data),
+        success: function (response){
+            alert('댓글이 성공적으로 작성되었습니다.')
+            window.location.reload();
+        }
+    })
+}
+

@@ -34,6 +34,20 @@ body {
     bottom: 15px;
     right: 17px;
 }
+.area-write1 {
+    position: relative;
+    width: 638px;
+    right: 700px;
+}
+
+.area-write1 img {
+    cursor: pointer;
+    position: absolute;
+    width: 22.2px;
+    height: 18.7px;
+    bottom: 15px;
+    right: 17px;
+}
 #header-title-login-user {
     font-size: 36px;
     letter-spacing: -1.08px;
@@ -157,7 +171,7 @@ textarea.field {
     padding: 18px;
     resize: none;
     position: relative;
-    top: 20px;
+    top: 50px;
 }
 
 textarea.field::placeholder {

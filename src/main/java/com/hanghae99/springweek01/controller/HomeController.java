@@ -29,8 +29,9 @@ public class HomeController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detailPage(Model model, @PathVariable Long id){
+    public String detailPage(Model model, @PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
         model.addAttribute("id", id);
+        model.addAttribute("username", userDetails.getUsername());
         return "detail";
     }
 
