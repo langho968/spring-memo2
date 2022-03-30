@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 public class Memo extends Timestamped {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 

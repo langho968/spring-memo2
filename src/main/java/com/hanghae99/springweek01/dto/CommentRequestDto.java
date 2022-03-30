@@ -7,5 +7,5 @@ import lombok.Getter;
 public class CommentRequestDto {
     private String username;
     private String contents;
-    private String detailNum;
+    private Long detailNum;
 }

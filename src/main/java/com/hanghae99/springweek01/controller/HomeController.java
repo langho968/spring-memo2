@@ -20,7 +20,11 @@ public class HomeController {
     }
     @GetMapping("/write")
     public String writePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        model.addAttribute("username", userDetails.getUsername());
+        if (userDetails != null) {
+            model.addAttribute("username", userDetails.getUsername());
+        } else {
+            model.addAttribute("username", "");
+        }
         return "write";
     }
     @GetMapping("/login")
@@ -30,8 +34,14 @@ public class HomeController {
 
     @GetMapping("/detail/{id}")
     public String detailPage(Model model, @PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        model.addAttribute("id", id);
-        model.addAttribute("username", userDetails.getUsername());
+        if(userDetails!=null){
+            model.addAttribute("id", id);
+            model.addAttribute("username", userDetails.getUsername());
+        } else {
+            model.addAttribute("id", id);
+            model.addAttribute("username", "");
+        }
+
         return "detail";
     }
 

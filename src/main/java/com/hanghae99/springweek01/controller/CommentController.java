@@ -2,6 +2,7 @@ package com.hanghae99.springweek01.controller;
 
 
 import com.hanghae99.springweek01.domain.Comment;
+import com.hanghae99.springweek01.domain.Memo;
 import com.hanghae99.springweek01.dto.CommentRequestDto;
 import com.hanghae99.springweek01.repository.CommentRepository;
 import com.hanghae99.springweek01.security.UserDetailsImpl;
@@ -27,8 +28,8 @@ public class CommentController {
         return commentRepository.save(comment);
     }
     @GetMapping("/api/comments/{id}")
-    public Long getComments(@PathVariable Long id){
-        return commentRepository.findAllById(id);
+    public List<Comment> getComments(@PathVariable Long id){
+        return commentRepository.findAllByDetailNum( id);
     }
 
     @PutMapping("/api/comments/{id}")

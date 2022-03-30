@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 public class Comment extends Timestamped {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -22,12 +22,12 @@ public class Comment extends Timestamped {
     private String contents;
 
     @Column(nullable = false)
-    private String detailNum;
+    private Long detailNum;
 
     @Column(nullable = false)
     private Long userId;
 
-    public Comment(String username, String contents,Long userId, String detailNum) {
+    public Comment(String username, String contents,Long userId, Long detailNum) {
         this.userId  = userId;
         this.username = username;
         this.contents = contents;
