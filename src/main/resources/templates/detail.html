@@ -18,12 +18,12 @@
         $(document).ready(function () {
             // HTML 문서를 로드할 때마다 실행합니다.
             getMessages();
+            getComment();
         })
 
         function getMessages() {
             $('#cards-box2').empty();
             let idVal = location.href.split("/")[4];
-            console.log(idVal);
             $.ajax({
                 type: "GET",
                 url: `/api/memos/detail/${idVal}`,
@@ -153,8 +153,107 @@
                 }
             })
         }
+        function getComment(){
+            let idval = location.href.split("/")[4];
+            $('#comments-box').empty();
+            $.ajax({
+                type:"GET",
+                url:`/api/comments/${idval}`,
+                success: function (response) {
+                    for (let i = 0; i < response.length; i++) {
+                        let comment = response[i];
+                        let id = comment.id;
+                        let userId = comment.userId;
+                        let username = comment.username;
+                        let contents = comment.contents;
+                        let modifiedAt = comment.modifiedAt;
+                        console.log(response);
+                        console.log(id, userId, username, contents, modifiedAt);
+                        addCommentHTML(id, userId, username, contents, modifiedAt);
+                    }
+                }
+            })
+        }
+        function addCommentHTML(id, userId, username, contents, modifiedAt){
+            let tempHtml = `<div class="card">
+                        <div class="metadata">
+                            <div class="date">
+                                ${modifiedAt}
+                            </div>
+                            <div id="${id}-username" class="username">
+                                ${username}
+                            </div>
+                        </div>
+                        <div class="contents">
+                            <div id="${id}-contents1" class="text">
+                                ${contents}
+                            </div>
+                            <div id="${id}-editarea1" class="edit">
+                                <textarea id="${id}-textarea1" class="te-edit" name="" id="" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <img id="${id}-edit1" class="icon-start-edit" src="../images/edit.png" alt="" onclick="editPost1('${id}')">
+                            <img id="${id}-delete1" class="icon-delete" src="../images/delete.png" alt="" onclick="deleteOne1('${id}')">
+                            <img id="${id}-submit1" class="icon-end-edit" src="../images/done.png" alt="" onclick="submitEdit1('${id}')">
+                        </div>
+                    </div>`;
+            $('#comments-box').append(tempHtml);
+            checkId(id, username)
+        }
+        function checkId(id, username){
+            let checkUsername = [[${username}]];
+            if( checkUsername!=username){
+                $(`#${id}-edit1`).hide();
+                $(`#${id}-delete1`).hide();
+            }
+        }
+        function editPost1(id) {
+            showEdits1(id);
+            let contents = $(`#${id}-contents1`).text().trim();
+            $(`#${id}-textarea1`).val(contents);
+        }
 
+        function showEdits1(id) {
+            $(`#${id}-editarea1`).show();
+            $(`#${id}-submit1`).show();
+            $(`#${id}-delete1`).show();
 
+            $(`#${id}-contents1`).hide();
+            $(`#${id}-edit1`).hide();
+        }
+        function submitEdit1(id) {
+
+            let username = $(`#${id}-username`).text().trim();
+            let contents = $(`#${id}-textarea1`).val().trim();
+            if (isValidContents(contents) === false) {
+                return;
+            }
+            let data = {'username': username,  'contents':contents};
+            console.log(data);
+            $.ajax({
+                type: "PUT",
+                url: `/api/comments/${id}`,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    alert('댓글 변경에 성공하였습니다.');
+                    //수정된 정보를 가져오기 위해 다시 한번 detail함수에 해당 id 값을 넣었다.
+                    //하지 않으면 수정된 정보를 안띄워줌
+                    window.location.reload();
+                }
+            });
+        }
+        function deleteOne1(id) {
+            $.ajax({
+                type: "DELETE",
+                url: `/api/comments/${id}`,
+                success: function (response) {
+                    alert('댓글 삭제에 성공하였습니다.');
+                    window.location.reload();
+                }
+            })
+        }
     </script>
 </head>
 
@@ -178,9 +277,11 @@
     <div id="cards-box2" class="area-read">
     </div>
     <div class="area-write1">
-        <textarea class="field" placeholder="게시판에 내용을 작성해주세요" name="contents" id="contents" cols="30"
+        <textarea class="field" placeholder="댓글을 작성해주세요" name="contents" id="contents" cols="30"
                   rows="10"></textarea>
         <img src="/images/send.png" alt="" onclick="writeComment()">
+    </div>
+    <div id="comments-box" class="area-read">
     </div>
 </div>
 </body>

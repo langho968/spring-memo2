@@ -36,8 +36,8 @@ body {
 }
 .area-write1 {
     position: relative;
-    width: 638px;
-    right: 700px;
+    width: 538px;
+    height: 146px;
 }
 
 .area-write1 img {
@@ -46,7 +46,7 @@ body {
     width: 22.2px;
     height: 18.7px;
     bottom: 15px;
-    right: 17px;
+    right: 30px;
 }
 #header-title-login-user {
     font-size: 36px;
@@ -72,9 +72,24 @@ body {
     text-align: center;
     color: #ffffff;
 }
-#logout-text1{
+#login-text{
     position:absolute;
     top:48px;
+    right:48px;
+    font-size: 18px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #ffffff;
+}
+#signup-text{
+    position:absolute;
+    top:78px;
     right:48px;
     font-size: 18px;
     font-family: SpoqaHanSansNeo;
@@ -277,4 +292,7 @@ textarea.field::placeholder {
 
 #cards-box {
     margin-top: 12px;
+}
+#comments-box {
+    top: 150px;
 }

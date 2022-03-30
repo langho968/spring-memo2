@@ -1,33 +1,9 @@
 $(document).ready(function () {
     getMessages();
-    // getUsername();
 })
-//
-// function getUsername(){
-//     $('#title-box').empty();
-//     $.ajax({
-//         type: 'GET',
-//         url: '/username',
-//         success: function (response){
-//             for(let i = 0; i<response.length; i++){
-//                 let data = response[i];
-//                 let title = data.username;
-//                 addTitle(title);
-//             }
-//
-//         }
-//     })
-// }
-// function addTitle(title){
-//     let tempHtml = `<h2>${title}의 게시판</h2>`
-//     $('#title-box').append(tempHtml);
-// }
 
 
 // 메모를 불러와서 보여줍니다.
-function moveWrite(){
-    location.href= "/write"
-}
 function getMessages() {
     $('#cards-box').empty();
     $.ajax({

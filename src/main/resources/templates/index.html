@@ -17,7 +17,82 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
-    <script src="/js/index.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            getMessages();
+            logoutBtn();
+        })
+
+
+        // 메모를 불러와서 보여줍니다.
+        function getMessages() {
+            $('#cards-box').empty();
+            $.ajax({
+                type: 'GET',
+                url: '/api/memos',
+                success: function (response) {
+                    for(let i=0; i<response.length; i++){
+                        let memo = response[i];
+                        let id = memo.id;
+                        let username = memo.username;
+                        let title = memo.title;
+                        let contents = memo.contents;
+                        let modifiedAt= memo.modifiedAt;
+                        addHTML(id, username, title, contents, modifiedAt);
+                    }
+                }
+            })
+        }
+        function moveWrite(){
+            let username =[[${username}]];
+            console.log(username);
+            if(!username){
+                alert("로그인이 필요합니다.");
+                location.href='/login'
+            }else{
+                location.href='/write'
+            }
+        }
+        function move(id){
+            location.href= `/detail/${id}`
+        }
+        function loginPage(){
+            location.href='/login'
+        }
+        function signupPage(){
+            location.href='/user/signup'
+        }
+        function logoutBtn(){
+            let username =[[${username}]];
+            if(!username){
+                $('#my_form').hide();
+                $('#signup-text').show();
+            }else{
+                $('#my_form').show();
+                $('#signup-text').hide();
+            }
+        }
+        function addHTML(id, username, title, contents, modifiedAt) {
+            let tempHtml = `<a onclick="move(${id})">
+                    <div class="card">
+                        <div class="metadata">
+                            <div class="date">
+                                ${modifiedAt}
+                            </div>
+                            <div id="${id}-username"  class="username">
+                                ${username}
+                            </div>
+                        </div>
+                        <div class="contents">
+                             <div id="${id}-title" class="title">
+                                ${title}
+                            </div>
+                            </a>
+                    </div>`;
+            $('#cards-box').append(tempHtml);
+        }
+
+    </script>
 </head>
 
 <body>
@@ -33,7 +108,10 @@
             <h2><span th:text="${username}"></span>님의 게시판</h2>
         </div>
         <form>
-            <a id="logout-text1" onclick="loginPage()">로그인</a>
+            <a id="login-text" onclick="loginPage()">로그인</a>
+        </form>
+        <form>
+            <a id="signup-text" onclick="signupPage()">회원가입</a>
         </form>
         <form id="my_form" method="post" action="/user/logout">
             <a id="logout-text" href="javascript:{}" onclick="document.getElementById('my_form').submit();">로그아웃</a>
