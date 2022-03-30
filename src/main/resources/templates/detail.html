@@ -131,14 +131,18 @@
         }
 
         function deleteOne(id) {
-            $.ajax({
-                type: "DELETE",
-                url: `/api/memos/${id}`,
-                success: function (response) {
-                    alert('게시글 삭제에 성공하였습니다.');
-                    window.location.href="index.html";
-                }
-            })
+            if(confirm("정말 삭제하시겠습니까?")==true) {
+                $.ajax({
+                    type: "DELETE",
+                    url: `/api/memos/${id}`,
+                    success: function (response) {
+                        alert('게시글 삭제에 성공하였습니다.');
+                        location.href="/";
+                    }
+                })
+            }else {
+                return false;
+            }
         }
         function moveIndex(){
             location.href= "/"
@@ -266,6 +270,7 @@
             });
         }
         function deleteOne1(id) {
+            if(confirm("정말 삭제하시겠습니까?")==true){
             $.ajax({
                 type: "DELETE",
                 url: `/api/comments/${id}`,
@@ -274,6 +279,9 @@
                     window.location.reload();
                 }
             })
+            }else{
+                return false;
+            }
         }
     </script>
 </head>
