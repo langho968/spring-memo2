@@ -20,7 +20,17 @@
             getMessages();
             getComment();
         })
-
+        function isValidContents(contents) {
+            if (contents == '') {
+                alert('내용을 입력해주세요');
+                return false;
+            }
+            if (contents.trim().length > 140) {
+                alert('공백 포함 140자 이하로 입력해주세요');
+                return false;
+            }
+            return true;
+        }
         function getMessages() {
             $('#cards-box2').empty();
             let idVal = location.href.split("/")[4];
@@ -65,6 +75,14 @@
                         </div>
                     </div>`;
             $('#cards-box2').append(tempHtml);
+            checkId1(id, username);
+        }
+        function checkId1(id, username){
+            let checkUsername = [[${username}]];
+            if( checkUsername!=username){
+                $(`#${id}-edit`).hide();
+                $(`#${id}-delete`).hide();
+            }
         }
         function editPost(id) {
             showEdits(id);
@@ -122,24 +140,27 @@
                 }
             })
         }
-        function isValidContents(contents) {
-            if (contents == '') {
-                alert('내용을 입력해주세요');
-                return false;
-            }
-            if (contents.trim().length > 140) {
-                alert('공백 포함 140자 이하로 입력해주세요');
-                return false;
-            }
-            return true;
-        }
         function moveIndex(){
             location.href= "/"
         }
+        function loginCheck(){
+            let checkUsername = [[${username}]];
+            if( !checkUsername){
+                alert("로그인이 필요한 기능입니다.");
+                window.location.href="/login";
+                return false;
+            }
+        }
         function writeComment(){
+            if(loginCheck()==false){
+                return;
+            }
             let contents = $('#contents').val();
             let username2 =[[${username}]];
             let detailNum = location.href.split("/")[4];
+            if(isValidContents(contents)==false){
+                return;
+            }
             let data = {'username':username2, 'contents':contents, 'detailNum': detailNum};
             console.log(data);
             $.ajax({
