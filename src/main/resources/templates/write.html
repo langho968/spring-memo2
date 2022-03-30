@@ -66,8 +66,11 @@
 
 </div>
 <div class="wrap">
-    <div class="header">
+    <div class="header" style="position:relative;">
         <h2><span th:text="${username}"></span>님의 게시판</h2>
+        <form>
+            <a id="login-text" onclick="move()">Home</a>
+        </form>
         <p>
             게시판에 내용을 작성해주세요.
         </p>

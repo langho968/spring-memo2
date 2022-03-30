@@ -355,7 +355,7 @@ button {
 }
 
 #login-title {
-    width: 303px;
+    width: 353px;
     height: 32px;
     /*margin: 56px auto auto auto;*/
     flex-grow: 0;
@@ -393,7 +393,28 @@ button {
     font-style: normal;
     color: #414141;
 }
+#home-id-btn {
+    width: 393px;
+    height: 62px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /*margin: 8px 0 0;*/
+    padding: 11px 12px;
+    border-radius: 5px;
+    border: solid 1px #212529;
+    background-color: #ffffff;
 
+    font-family: SpoqaHanSansNeo;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    color: #414141;
+}
 #login-id-btn {
     width: 393px;
     height: 62px;

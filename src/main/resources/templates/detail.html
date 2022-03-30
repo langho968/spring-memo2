@@ -283,6 +283,9 @@
                 return false;
             }
         }
+        function move(){
+            location.href='/';
+        }
     </script>
 </head>
 
@@ -294,12 +297,13 @@
 
 </div>
 <div class="wrap">
-    <div class="header">
+    <div class="header" style="position:relative;">
         <h2><span th:text="${username}"></span>님의 게시판</h2>
+        <form>
+            <a id="login-text" onclick="move()">Home</a>
+        </form>
         <p>
             게시판 상세 페이지입니다.
-            내용을 확인하고 수정하거나
-            삭제할 수 있습니다.
         </p>
     </div>
     <button type="button" id="content-button" class="btn btn-dark" onclick="moveIndex()">목록으로 돌아가기</button>
